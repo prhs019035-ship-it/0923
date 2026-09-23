@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>邱卉伃 (MINI) - 個人名片</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Noto+Sans+TC:wght@400;600;800&family=Patrick+Hand&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Noto Sans TC', 'Patrick Hand', sans-serif;
+            background-color: var(--bg-color, #FAF4ED);
+            transition: background-color 0.4s ease;
+        }
+
+        .hand-written {
+            font-family: 'Patrick Hand', 'Caveat', cursive, 'Noto Sans TC';
+        }
+
+        /* Organic hand-drawn borders */
+        .wobbly-border {
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+        }
+        
+        .wobbly-border-alt {
+            border-radius: 20px 255px 20px 225px / 225px 20px 255px 20px;
+        }
+
+        .hand-drawn-box {
+            border: 3.5px solid #2B2D42;
+            box-shadow: 5px 6px 0px #2B2D42;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Requested hover dynamics: rotate 360 deg, move up, deep enlarged shadow */
+        .hand-drawn-box:hover {
+            transform: translateY(-12px) rotate(360deg);
+            box-shadow: 12px 18px 25px rgba(43, 45, 66, 0.25), 8px 10px 0px #2B2D42;
+        }
+
+        .hand-drawn-btn {
+            border: 3px solid #2B2D42;
+            box-shadow: 3px 4px 0px #2B2D42;
+            transition: all 0.2s ease;
+        }
+
+        .hand-drawn-btn:hover {
+            transform: translate(-2px, -2px) scale(1.03);
+            box-shadow: 5px 6px 0px #2B2D42;
+        }
+
+        .hand-drawn-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 1px 2px 0px #2B2D42;
+        }
+
+        /* SVG Doodle animations */
+        @keyframes doodleFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(3deg); }
+        }
+
+        .animate-doodle {
+            animation: doodleFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes pulseSparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+            50% { transform: scale(1.25) rotate(15deg); opacity: 1; }
+        }
+
+        .sparkle-icon {
+            animation: pulseSparkle 2s ease-in-out infinite;
+        }
+
+        /* Sparkle Particle Effect on click */
+        .sparkle-particle {
+            position: absolute;
+            pointer-events: none;
+            animation: popAndFade 0.7s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
+        }
+
+        @keyframes popAndFade {
+            0% { transform: translate(-50%, -50%) scale(0.2) rotate(0deg); opacity: 1; }
+            100% { transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1) rotate(var(--rot)); opacity: 0; }
+        }
+
+        /* Custom palette variables */
+        :root {
+            --bg-color: #FAF4ED;
+            --card-bg: #FFFFFF;
+            --accent-yellow: #FFE17D;
+            --accent-pink: #FFB4A2;
+            --accent-blue: #A2D2FF;
+            --accent-green: #B5EAD7;
+            --text-color: #2B2D42;
+        }
+
+        /* Theme palette variations */
+        body.theme-sunset {
+            --bg-color: #FFF2E6;
+            --card-bg: #FFFFFF;
+            --accent-yellow: #FFD166;
+            --accent-pink: #FF9F1C;
+            --accent-blue: #2EC4B6;
+            --accent-green: #CBF3F0;
+        }
+
+        body.theme-matcha {
+            --bg-color: #F0F4EC;
+            --card-bg: #FFFFFF;
+            --accent-yellow: #E9EDC9;
+            --accent-pink: #CCD5AE;
+            --accent-blue: #A3B18A;
+            --accent-green: #D4A373;
+        }
+
+        body.theme-berry {
+            --bg-color: #F8EDEB;
+            --card-bg: #FFFFFF;
+            --accent-yellow: #FEC5BB;
+            --accent-pink: #FCD5CE;
+            --accent-blue: #FAE1DD;
+            --accent-green: #E8E8E4;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden selection:bg-yellow-200">
+
+    <svg class="absolute top-8 left-8 w-16 h-16 opacity-40 text-amber-500 animate-doodle" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M50 10 Q60 35 85 50 Q60 65 50 90 Q40 65 15 50 Q40 35 50 10 Z" fill="#FFE17D" />
+    </svg>
+    <svg class="absolute bottom-12 left-12 w-20 h-20 opacity-30 text-rose-400 animate-doodle" style="animation-delay: 1s;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <path d="M20,50 Q40,20 80,40 T50,80 Z" fill="#FFB4A2"/>
+    </svg>
+    <svg class="absolute top-16 right-10 w-20 h-20 opacity-40 text-sky-400 animate-doodle" style="animation-delay: 1.5s;" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+        <circle cx="50" cy="50" r="30" stroke-dasharray="8,6" fill="none"/>
+        <path d="M35 50 Q50 35 65 50 T95 50" stroke="#A2D2FF" stroke-width="3"/>
+    </svg>
+
+    <!-- Floating Top-Right Theme Switcher Button -->
+    <div class="fixed top-5 right-5 z-40 flex items-center gap-2">
+        <button id="mainThemeBtn" onclick="cycleTheme(event)" class="bg-[var(--accent-yellow)] text-slate-800 font-extrabold px-3.5 py-2 wobbly-border hand-drawn-btn flex items-center gap-2 text-xs sm:text-sm shadow-md cursor-pointer transition-transform">
+            <span class="text-base">🎨</span>
+            <span>切換色彩 (<span id="themeName">馬卡龍</span>)</span>
+        </button>
+    </div>
+
+    <!-- Business Card Container -->
+    <main class="relative w-full max-w-sm sm:max-w-md bg-white hand-drawn-box wobbly-border p-6 sm:p-8 text-center z-10 my-8">
+        
+        <!-- Palette Switcher Icon Button (Inside Card Top-Right) -->
+        <button title="切換配色主題" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-amber-100 hover:bg-amber-200 border-2 border-slate-800 flex items-center justify-center transition-transform active:scale-95" onclick="cycleTheme(event)">
+            <svg class="w-5 h-5 text-slate-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+            </svg>
+        </button>
+
+        <!-- Avatar Section with cute hand-drawn illustration -->
+        <div class="relative inline-block my-2">
+            <!-- Decorative circle behind avatar -->
+            <div class="absolute -inset-2 rounded-full bg-[var(--accent-yellow)] wobbly-border-alt -z-10 transform -rotate-6 transition-colors"></div>
+            
+            <!-- Avatar Section with Shoebill Image & SVG Fallback -->
+            <div class="w-28 h-28 sm:w-32 sm:h-32 rounded-full border-3 border-slate-800 bg-orange-50 flex items-center justify-center overflow-hidden shadow-sm relative group cursor-pointer" onclick="triggerSparkles(event)">
+                <img src="https://images.unsplash.com/photo-1574063413132-355dbfd83e0c?auto=format&fit=crop&w=400&q=80" 
+                     alt="鯨頭鸛" 
+                     class="w-full h-full object-cover object-top" 
+                     onerror="this.style.display='none'; document.getElementById('shoebillSvgFallback').classList.remove('hidden');">
+
+                <!-- Hand-drawn style Shoebill SVG Fallback -->
+                <svg id="shoebillSvgFallback" class="hidden w-20 h-20 text-slate-700" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- Head & Crest -->
+                    <path d="M 40,25 C 30,10 60,8 65,22 C 72,12 82,25 75,35" fill="#94A3B8"/>
+                    <!-- Large Bill / Beak -->
+                    <path d="M 45,30 C 25,32 15,50 30,68 C 45,78 65,72 68,52 C 70,42 60,32 45,30 Z" fill="#CBD5E1"/>
+                    <path d="M 30,68 Q 20,72 18,62 Q 22,58 32,60" fill="#94A3B8"/>
+                    <!-- Bill details -->
+                    <path d="M 40,32 C 30,45 35,60 52,68"/>
+                    <circle cx="28" cy="62" r="2" fill="#2B2D42"/>
+                    <!-- Eye -->
+                    <circle cx="58" cy="35" r="5" fill="#FFE17D" stroke="#2B2D42" stroke-width="2"/>
+                    <circle cx="57" cy="35" r="2" fill="#2B2D42"/>
+                    <!-- Neck/Feathers -->
+                    <path d="M 68,50 C 75,65 70,85 65,95 M 50,73 C 52,85 48,95 45,98" stroke-width="3.5"/>
+                </svg>
+
+                <div class="absolute bottom-0 inset-x-0 bg-slate-800/80 text-white text-[10px] py-0.5 opacity-0 group-hover:opacity-100 transition-opacity hand-written">
+                    鯨頭鸛 MINI 👋
+                </div>
+            </div>
+
+            <!-- Crown / Sparkle doodle above head -->
+            <svg class="absolute -top-3 -right-1 w-7 h-7 text-amber-400 sparkle-icon" viewBox="0 0 50 50" fill="currentColor">
+                <path d="M25 0 L30 18 L48 25 L30 32 L25 50 L20 32 L2 25 L20 18 Z" />
+            </svg>
+        </div>
+
+        <!-- Profile Info -->
+        <div class="mt-3">
+            <div class="relative inline-block">
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-800 tracking-wide">邱卉伃 <span class="text-base font-normal text-slate-500 hand-written">(MINI)</span></h1>
+                <svg class="w-full h-3 text-[var(--accent-pink)] -mt-1" viewBox="0 0 200 20" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round">
+                    <path d="M5 12 Q 50 2, 100 12 T 195 10" />
+                </svg>
+            </div>
+
+            <div class="mt-2 flex items-center justify-center gap-2">
+                <span class="inline-block bg-[var(--accent-green)] text-slate-800 text-xs sm:text-sm font-semibold px-3 py-1 wobbly-border border-2 border-slate-800 shadow-sm transition-colors">
+                    ✨ UI/UX 設計師 & 視覺插畫家
+                </span>
+            </div>
+
+            <p class="mt-3 text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xs mx-auto">
+                喜歡用「極簡筆觸」與「溫暖色彩」記錄生活的靈感。專長於品牌視覺設計與軟萌網頁互動體驗！
+            </p>
+        </div>
+
+        <!-- Tags/Skills -->
+        <div class="flex flex-wrap justify-center gap-1.5 mt-4 text-xs font-bold text-slate-700">
+            <span class="bg-amber-100 px-2.5 py-1 rounded-full border border-slate-700">🎨 插畫繪製</span>
+            <span class="bg-sky-100 px-2.5 py-1 rounded-full border border-slate-700">💻 網頁設計</span>
+            <span class="bg-rose-100 px-2.5 py-1 rounded-full border border-slate-700">☕ 咖啡成癮</span>
+        </div>
+
+        <!-- Main Call to Action Buttons -->
+        <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <button onclick="openContactModal(event)" class="w-full sm:w-auto flex-1 bg-[var(--accent-yellow)] text-slate-800 font-bold px-5 py-2.5 wobbly-border hand-drawn-btn flex items-center justify-center gap-2 text-sm sm:text-base cursor-pointer">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+                與我聯繫
+            </button>
+
+            <a href="#portfolio" onclick="showPortfolioToast(event)" class="w-full sm:w-auto bg-white text-slate-800 font-bold px-4 py-2.5 wobbly-border-alt hand-drawn-btn flex items-center justify-center gap-1.5 text-sm sm:text-base cursor-pointer">
+                <span>作品集</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- Social Doodle Links -->
+        <div class="mt-6 pt-4 border-t-2 border-dashed border-slate-300 flex justify-center items-center gap-5">
+            <button onclick="copySocialLink(event, 'Instagram: @mini_design')" class="text-slate-600 hover:text-rose-500 transition-colors p-1" title="Instagram">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </button>
+            <button onclick="copySocialLink(event, 'Dribbble: @mini_illustration')" class="text-slate-600 hover:text-pink-500 transition-colors p-1" title="Dribbble">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.628 0-12 5.372-12 12s5.372 12 12 12 12-5.372 12-12-5.372-12-12-12zm9.885 11.441c-2.592-.305-5.006.129-7.248.971 1.229 3.235 2.181 6.643 2.502 9.429 2.822-2.023 4.689-5.385 4.746-9.400zm-6.082 10.878c-.352-2.812-1.325-6.173-2.583-9.362-2.317 1.258-4.322 2.986-5.877 5.097 2.052 2.378 5.045 3.906 8.46 4.265zm-13.803-8.889c.046 0 .092-.002.138-.002 2.928 0 5.864-.816 8.354-2.182-.471-1.042-.988-2.062-1.573-3.051-3.929 1.264-7.85 1.428-11.233.279.356 1.884 1.884 4.103 4.314 4.956zm.542-7.143c3.155 1.055 6.815.892 10.435-.286-1.127-1.99-2.482-3.808-4.041-5.341-3.328.718-5.962 3.011-6.394 5.627zm8.384-6.621c1.556 1.488 2.88 3.255 3.985 5.201 2.222-.796 4.544-1.191 7.029-.897-.849-2.223-2.39-4.062-4.398-5.263-1.956-.002-4.832.227-6.616.959z"/></svg>
+            </button>
+            <button onclick="copySocialLink(event, 'GitHub: @mini-dev')" class="text-slate-600 hover:text-slate-900 transition-colors p-1" title="GitHub">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </button>
+        </div>
+    </main>
+
+    <!-- Interactive Hand-drawn Contact Modal -->
+    <div id="contactModal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="bg-white w-full max-w-sm p-6 wobbly-border hand-drawn-box relative transform scale-95 transition-transform duration-300" id="modalContent">
+            <button onclick="closeContactModal()" class="absolute top-3 right-3 text-slate-500 hover:text-slate-800 font-bold text-xl p-1">
+                ✕
+            </button>
+
+            <div class="text-center mb-4">
+                <span class="text-3xl">💌</span>
+                <h2 class="text-xl font-extrabold text-slate-800 mt-1">傳送訊息給 邱卉伃 (MINI)</h2>
+                <p class="text-xs text-slate-500 mt-0.5">有任何合作想法或想聊聊嗎？</p>
+            </div>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">您的暱稱 / 稱呼</label>
+                    <input type="text" required placeholder="例如：阿明" class="w-full px-3 py-2 text-sm border-2 border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 bg-amber-50/30">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">聯絡 Email</label>
+                    <input type="email" required placeholder="hello@example.com" class="w-full px-3 py-2 text-sm border-2 border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 bg-amber-50/30">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 mb-1">想說的話</label>
+                    <textarea rows="3" required placeholder="寫下您的想法..." class="w-full px-3 py-2 text-sm border-2 border-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-300 bg-amber-50/30 resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-[var(--accent-pink)] text-slate-800 font-bold py-2.5 wobbly-border hand-drawn-btn text-sm mt-2">
+                    送出信件 🚀
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Custom Toast Message -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-slate-800 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-full border-2 border-white shadow-lg opacity-0 pointer-events-none transition-all duration-300 z-50 flex items-center gap-2">
+        <span id="toastMsg">訊息通知</span>
+    </div>
+
+    <script>
+        // Palette Theme Switcher Logic
+        const themes = [
+            { id: '', name: '馬卡龍' },
+            { id: 'theme-sunset', name: '日落暖橘' },
+            { id: 'theme-matcha', name: '抹茶森林' },
+            { id: 'theme-berry', name: '野莓甜心' }
+        ];
+        let currentThemeIndex = 0;
+
+        function cycleTheme(e) {
+            e.stopPropagation();
+            currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+            
+            // Remove old theme classes
+            document.body.className = "min-h-screen flex flex-col items-center justify-center p-4 relative overflow-x-hidden selection:bg-yellow-200";
+            
+            // Add new theme if not default
+            const currentTheme = themes[currentThemeIndex];
+            if (currentTheme.id) {
+                document.body.classList.add(currentTheme.id);
+            }
+
+            // Update Theme Name Display
+            const themeNameElem = document.getElementById('themeName');
+            if (themeNameElem) {
+                themeNameElem.textContent = currentTheme.name;
+            }
+
+            // Create explosion of sparkles at button
+            triggerSparkles(e);
+            showToast(`🎨 切換主題調色盤：${currentTheme.name}`);
+        }
+
+        // Contact Modal Handlers
+        function openContactModal(e) {
+            e.stopPropagation();
+            triggerSparkles(e);
+            const modal = document.getElementById('contactModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            content.classList.add('scale-100');
+        }
+
+        function closeContactModal() {
+            const modal = document.getElementById('contactModal');
+            const content = document.getElementById('modalContent');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            closeContactModal();
+            showToast("✨ 感謝您的來信！我會儘快回覆。");
+        }
+
+        function showPortfolioToast(e) {
+            e.preventDefault();
+            triggerSparkles(e);
+            showToast("🚀 正在開啟作品集... (示範連結)");
+        }
+
+        function copySocialLink(e, text) {
+            e.stopPropagation();
+            triggerSparkles(e);
+            
+            const dummy = document.createElement('input');
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand('copy');
+            document.body.removeChild(dummy);
+
+            showToast(`📋 已複製：${text}`);
+        }
+
+        // Toast Helper
+        let toastTimeout;
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.textContent = msg;
+            
+            toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+            toast.classList.add('opacity-100', '-translate-y-1');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('opacity-100', '-translate-y-1');
+                toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+            }, 2500);
+        }
+
+        // Dynamic Hand-Drawn Sparkle Particle Generator
+        function triggerSparkles(e) {
+            const x = e.clientX || window.innerWidth / 2;
+            const y = e.clientY || window.innerHeight / 2;
+            
+            const colors = ['#FFE17D', '#FFB4A2', '#A2D2FF', '#B5EAD7', '#2B2D42'];
+            const shapes = ['★', '✦', '▲', '●', '✿'];
+
+            for (let i = 0; i < 8; i++) {
+                const particle = document.createElement('span');
+                particle.className = 'sparkle-particle font-bold text-sm';
+                particle.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.left = `${x}px`;
+                particle.style.top = `${y}px`;
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 30 + Math.random() * 50;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+                const rot = (Math.random() - 0.5) * 360;
+
+                particle.style.setProperty('--dx', `${dx}px`);
+                particle.style.setProperty('--dy', `${dy}px`);
+                particle.style.setProperty('--rot', `${rot}deg`);
+
+                document.body.appendChild(particle);
+
+                setTimeout(() => particle.remove(), 700);
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            if (e.target === document.body) {
+                triggerSparkles(e);
+            }
+        });
+    </script>
+</body>
+</html>
